@@ -7,7 +7,7 @@
 	<Target Name="CopyPetraFrameworkFiles"	BeforeTargets="BeforeBuild"	Condition="Exists('$(ProjectDir)project.godot')">
 
 		<Message Importance="High"
-				 Text="[Petra Framework](V10) Synchronizing framework assets into Godot project.&#10;@(PetraPackages->'    [Petra Framework] Added: %(Identity)', '&#10;')" />
+				 Text="[Petra Framework] Synchronizing framework assets into Godot project.&#10;@(PetraPackages->'    [Petra Framework] Added: %(Identity)', '&#10;')" />
 		
 		<PropertyGroup>
 			<NoWarn>$(NoWarn);CS0436</NoWarn>
