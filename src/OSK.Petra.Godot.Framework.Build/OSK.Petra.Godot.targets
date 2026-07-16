@@ -4,17 +4,22 @@
 		<NoWarn>$(NoWarn);CS0436</NoWarn>
 	</PropertyGroup>
 	
-	<Target Name="CopyPetraFrameworkFiles"	BeforeTargets="BeforeBuild"	Condition="Exists('$(ProjectDir)project.godot')">
+	<Target Name="CopyPetraFrameworkFiles"	BeforeTargets="CoreCompile"	Condition="Exists('$(ProjectDir)project.godot')">
 
 		<Message Importance="High"
 				 Text="[Petra Framework] Synchronizing framework assets into Godot project.&#10;@(PetraPackages->'    [Petra Framework] Added: %(Identity)', '&#10;')" />
-		
-		<PropertyGroup>
-			<NoWarn>$(NoWarn);CS0436</NoWarn>
-		</PropertyGroup>
+
+		<Message
+			Condition="'@(PetraGodotFiles)' == ''"
+			Text="[Petra Framework] No framework files were found to be added." />
 
 		<RemoveDir Directories="$(ProjectDir)PetraFramework" Condition="Exists('$(ProjectDir)PetraFramework')" />
 		
-		<Copy SourceFiles="@(PetraGodotFiles)" DestinationFiles="@(PetraGodotFiles->'%(DestFolder)%(RecursiveDir)%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(PetraGodotFiles)" DestinationFiles="@(PetraGodotFiles->'%(DestFolder)%(RecursiveDir)%(Filename)%(Extension)')" ContinueOnError="true" />
+		
+		<ItemGroup>
+			<Compile Remove="$(ProjectDir)PetraFramework\**\*.cs" />
+			<Compile Include="@(PetraGodotFiles->'%(DestFolder)%(RecursiveDir)%(Filename)%(Extension)')" />
+		</ItemGroup>
 	</Target>
 </Project>
