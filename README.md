@@ -42,5 +42,5 @@ To ensure the Petra framework and suite works with your project, please note the
   **/PetraFramework/
   ```
 ## Removal & Cleanup
-As long as a Petra related package is added, the build should modify and cleanup the `PetraFramework` directory as packages are rmeoved or added.
+As long as a Petra related package is added, the build should modify and cleanup the `PetraFramework` directory as packages are removed or added.
 However, if you are wanting to remove the framework entirely from your project, be sure to delete the the `PetraFramework` directory after removing all the packages from your project, as no build process from Petra will be available to clean it up.
